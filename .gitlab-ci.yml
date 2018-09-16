@@ -22,7 +22,7 @@ publish:
   script:
     - Publish-Module -NuGetApiKey  $env:LPT_NugetKey -Path .\src\LinuxPowershellTools\
   only:
-    master
+    - master
 
 #Test stage, will remove in the future
 # publishtest:

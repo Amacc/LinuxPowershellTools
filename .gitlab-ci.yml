@@ -1,7 +1,4 @@
-image:
-  name: mcr.microsoft.com/powershell:6.1.0-ubuntu-18.04
-  entrypoint:
-    - pwsh
+image: mcr.microsoft.com/powershell:centos-7
 
 before_script:
   - Install-Module PSScriptAnalyzer

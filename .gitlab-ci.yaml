@@ -1,0 +1,35 @@
+image: mcr.microsoft.com/powershell:6.1.0-ubuntu-18.04
+
+before_script:
+  - Install-Module PSScriptAnalyzer
+  - gci -r ./src | %{ Invoke-ScriptAnalyzer $_.FullName }
+
+stages:
+  - test
+  - deploy
+
+.base:
+  tags:
+    - docker
+
+test:
+  extends: .base
+  script:
+    -
+
+publish:
+  extends: .base
+  stage: deploy
+  script:
+    - Publish-Module -NuGetApiKey  $env:LPT_NugetKey -Path .\src\LinuxPowershellTools\
+  only:
+    master
+
+#Test stage, will remove in the future
+# publishtest:
+#   extends: .base
+#   stage: deploy
+#   script:
+#     - Publish-Module -NuGetApiKey  $env:LPT_NugetKey -Path .\src\LinuxPowershellTools\
+#   only:
+#     - feature/cicd

@@ -1,8 +1,7 @@
-image: mcr.microsoft.com/powershell:6.1.0-ubuntu-18.04
+./image: mcr.microsoft.com/powershell:6.1.0-ubuntu-18.04
 
 before_script:
   - Install-Module PSScriptAnalyzer
-  - gci -r ./src | %{ Invoke-ScriptAnalyzer $_.FullName }
 
 stages:
   - test
@@ -15,7 +14,7 @@ stages:
 test:
   extends: .base
   script:
-    -
+    - gci -r ./src | %{ Invoke-ScriptAnalyzer $_.FullName }
 
 publish:
   extends: .base

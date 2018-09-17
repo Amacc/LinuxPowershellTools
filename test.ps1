@@ -2,7 +2,7 @@
 $ErrorActionPreference= "Stop"
 try{
     # Install Dependencies
-    Install-Module PSScriptAnalyzer -Confirm -Force
+    Install-Module PSScriptAnalyzer -Force
     Get-ChildItem -Recurse ./src |
         ForEach-Object{
             Invoke-ScriptAnalyzer $_.FullName

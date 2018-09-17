@@ -1,4 +1,6 @@
-image: mcr.microsoft.com/powershell:centos-7
+image:
+  name: mcr.microsoft.com/powershell:centos-7
+  entrypoint: ["/usr/bin/pwsh"]
 
 before_script:
   - Install-Module PSScriptAnalyzer

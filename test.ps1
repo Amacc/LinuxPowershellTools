@@ -3,8 +3,9 @@ $ErrorActionPreference= "Stop"
 try{
     # Install Dependencies
     Install-Module PSScriptAnalyzer -Force
-    Get-ChildItem -Recurse ./src |
+    Get-ChildItem -Recurse ./src -Filter "*.ps1" |
         ForEach-Object{
+            Write-Host "Checking $($_.FullName)"
             Invoke-ScriptAnalyzer $_.FullName
         }
 } catch {

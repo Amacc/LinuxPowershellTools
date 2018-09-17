@@ -1,9 +1,8 @@
-image:
-  name: mcr.microsoft.com/powershell:centos-7
-  entrypoint: ["/usr/bin/pwsh"]
+image: mcr.microsoft.com/powershell:centos-7
 
-before_script:
-  - Install-Module PSScriptAnalyzer
+# Due to Container forcing /bin/bash moving to build.ps1
+# before_script:
+#   - Install-Module PSScriptAnalyzer
 
 stages:
   - test
@@ -16,7 +15,7 @@ stages:
 test:
   extends: .base
   script:
-    - gci -r ./src | %{ Invoke-ScriptAnalyzer $_.FullName }
+    - /bin/pwsh -File ./test.ps1
 
 publish:
   extends: .base

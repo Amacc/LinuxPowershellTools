@@ -3,11 +3,16 @@ $ErrorActionPreference= "Stop"
 try{
     # Install Dependencies
     Install-Module PSScriptAnalyzer -Force
+
+    # Check the scripts for errors
     Get-ChildItem -Recurse ./src -Filter "*.ps1" |
         ForEach-Object{
-            Write-Host "Checking $($_.FullName)"
+            Write-Host "Checking $($_.Name)"
             Invoke-ScriptAnalyzer $_.FullName
         }
+
+    # Test the Module Manifest for Errors
+    Test-ModuleManifest .\src\LinuxPowershellTools\LinuxPowershellTools.psd1
 } catch {
     # Write the error message to screen
     Write-Host ((@(
